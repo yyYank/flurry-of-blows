@@ -105,3 +105,20 @@ project(":core") {
 tasks.eclipse.doLast {
     delete ".project"
 }
+
+task build(overwrite : true) << {
+    build {
+        compileJava
+        compileKotlin
+        processResources
+        classes
+        jar
+        assemble
+        compileTestJava
+        compileTestKotlin
+        testClasses
+        test
+        check
+        build
+    }
+}

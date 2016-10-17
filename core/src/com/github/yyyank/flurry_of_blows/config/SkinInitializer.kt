@@ -30,7 +30,7 @@ object SkinInitializer {
         assets.forEach {
             val (name, asset) = it
             am.load(asset)
-            skin.add(name, asset, Texture::class.java)
+            skin.add(name, am.get(name), Texture::class.java)
         }
 
 
