@@ -29,7 +29,6 @@ public class FlurryOfBlowsGame extends Game {
 	@Override
 	public void create () {
 		config = createConfig();
-		skin = SkinInitializer.INSTANCE.initialize(am);
 		setScreen(new TitleScreen(this, am));
 	}
 

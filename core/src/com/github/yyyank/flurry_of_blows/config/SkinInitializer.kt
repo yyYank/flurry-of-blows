@@ -2,9 +2,13 @@ package com.github.yyyank.flurry_of_blows.config
 
 import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.assets.loaders.BitmapFontLoader
 import com.badlogic.gdx.assets.loaders.TextureLoader
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by yy_yank on 2016/10/17.
@@ -12,28 +16,48 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 object SkinInitializer {
 
     fun  initialize(am :AssetManager ) : Skin {
+
+
+
+
         val skin = Skin();
+
+        val fontParams = BitmapFontLoader.BitmapFontParameter().let {
+            it.minFilter = Texture.TextureFilter.Linear
+            it.magFilter = Texture.TextureFilter.Linear
+            it
+        }
+        val fontAsset = AssetDescriptor<BitmapFont>("mplus1m.fnt", BitmapFont::class.java, fontParams)
+        am.load(fontAsset)
+        am.finishLoading()
+        skin.add("default", am.get(fontAsset), BitmapFont::class.java)
         val params = TextureLoader.TextureParameter().let {
             it.minFilter = Texture.TextureFilter.Linear
             it.magFilter = Texture.TextureFilter.Linear
             it
         }
 
-        val titleBackgroundAsset= textureDesc("title/background.png", params);
+        val titleBackgroundAsset = textureDesc("title/background.png", params);
         val titleStartUpAsset = textureDesc("title/startup.png", params);
         val titleStartDownAsset = textureDesc("title/startdown.png", params);
 
         val assets = listOf(
-                "titleBackground" to titleBackgroundAsset, "titleStartUp" to titleStartUpAsset, "titleStartDown" to titleStartDownAsset
+                "titleBackground" to titleBackgroundAsset,
+                "titleStartUp" to titleStartUpAsset,
+                "titleStartDown" to titleStartDownAsset
         )
 
         assets.forEach {
             val (name, asset) = it
             am.load(asset)
-            skin.add(name, am.get(name), Texture::class.java)
+            while(!am.update()) {
+                TimeUnit.MILLISECONDS.sleep(10)
+            }
+            am.finishLoading()
+            skin.add(name, am.get(asset), Texture::class.java)
         }
 
-
+        Button.ButtonStyle(skin.getDrawable("titleStartUp"), skin.getDrawable("titleStartDown"), null).let { skin.add("titleStart", it, Button.ButtonStyle::class.java) }
         return skin
     }
 
