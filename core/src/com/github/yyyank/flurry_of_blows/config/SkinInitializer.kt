@@ -5,7 +5,6 @@ import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.assets.loaders.BitmapFontLoader
 import com.badlogic.gdx.assets.loaders.TextureLoader
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import java.util.concurrent.TimeUnit
@@ -15,9 +14,7 @@ import java.util.concurrent.TimeUnit
  */
 object SkinInitializer {
 
-    fun  initialize(am :AssetManager ) : Skin {
-
-
+    fun initialize(am: AssetManager): Skin {
 
 
         val skin = Skin();
@@ -27,10 +24,6 @@ object SkinInitializer {
             it.magFilter = Texture.TextureFilter.Linear
             it
         }
-        val fontAsset = AssetDescriptor<BitmapFont>("mplus1m.fnt", BitmapFont::class.java, fontParams)
-        am.load(fontAsset)
-        am.finishLoading()
-        skin.add("default", am.get(fontAsset), BitmapFont::class.java)
         val params = TextureLoader.TextureParameter().let {
             it.minFilter = Texture.TextureFilter.Linear
             it.magFilter = Texture.TextureFilter.Linear
@@ -50,7 +43,7 @@ object SkinInitializer {
         assets.forEach {
             val (name, asset) = it
             am.load(asset)
-            while(!am.update()) {
+            while (!am.update()) {
                 TimeUnit.MILLISECONDS.sleep(10)
             }
             am.finishLoading()
@@ -62,7 +55,7 @@ object SkinInitializer {
     }
 
 
-     fun textureDesc(s : String,params : TextureLoader.TextureParameter ) : AssetDescriptor<Texture>{
+    fun textureDesc(s: String, params: TextureLoader.TextureParameter): AssetDescriptor<Texture> {
         return AssetDescriptor(s, Texture::class.java, params)
     }
 }

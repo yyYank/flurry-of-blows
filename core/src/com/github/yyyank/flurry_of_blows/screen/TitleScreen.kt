@@ -12,49 +12,37 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
-import com.github.yyyank.flurry_of_blows.config.SkinInitializer
+import com.github.yyyank.flurry_of_blows.Position
+import com.github.yyyank.flurry_of_blows.register
 
 /**
  * タイトル画面
  * Created by yy_yank on 2016/10/16.
  */
-class TitleScreen(val game : FlurryOfBlowsGame, val am : AssetManager) : ScreenAdapter() {
+class TitleScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAdapter() {
 
-    val stage : Stage = game.config.stage
-    val skin : Skin
+    val stage: Stage = game.config.stage
+    val skin: Skin = game.config.skin
 
     init {
-        skin = SkinInitializer.initialize(am)
-
-        Image(skin, "titleBackground").let {
-            it.setPosition(0f, 0f)
-            stage.addActor(it)
-        }
-
-        Button(skin, "titleStart").let {
-            it.setPosition(0f, it.height)
-            stage.addActor(it)
-            it.addListener(object : ClickListener() {
-                override fun clicked(event: InputEvent, x: Float, y: Float) {
-                    val fadeOut = Actions.fadeOut(0.5f)
-                    val toGameScreen = Actions.run(Runnable {
-                        game.screen = FlurryOfBlowsScreen()
-                    })
-                    stage.addAction(Actions.sequence(fadeOut, toGameScreen))
+        println("${this.javaClass.name} init")
+        stage.register(Image(skin, "titleBackground"), Position(0f, 0f))
+        val button = Button(skin, "titleStart")
+        stage.register(button, Position(0f, button.height),
+                object : ClickListener() {
+                    override fun clicked(event: InputEvent, x: Float, y: Float) {
+                        val fadeOut = Actions.fadeOut(0.5f)
+                        val toGameScreen = Actions.run(Runnable {
+                            game.screen = FlurryOfBlowsScreen()
+                        })
+                        stage.addAction(Actions.sequence(fadeOut, toGameScreen))
+                    }
                 }
-            })
-        }
-
-
-
-        val toTransparent = Actions.alpha(0f)
-        val fadeIn = Actions.fadeIn(0.5f)
-        stage.addAction(Actions.sequence(toTransparent, fadeIn))
+        )
     }
 
     override fun render(delta: Float) {
         super.render(delta)
-
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         stage.act()
@@ -62,24 +50,30 @@ class TitleScreen(val game : FlurryOfBlowsGame, val am : AssetManager) : ScreenA
     }
 
     override fun resize(width: Int, height: Int) {
+        println("${this.javaClass.name} resize")
         stage.viewport.update(width, height)
     }
 
     override fun show() {
+        println("${this.javaClass.name} show")
         Gdx.input.inputProcessor = stage
     }
 
     override fun hide() {
+        println("${this.javaClass.name} hide")
         dispose()
     }
 
     override fun pause() {
+        println("${this.javaClass.name} pause")
     }
 
     override fun resume() {
+        println("${this.javaClass.name} resume")
     }
 
     override fun dispose() {
+        println("${this.javaClass.name} dispose")
         stage.dispose()
     }
 }
