@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
-import com.github.yyyank.flurry_of_blows.Position
+import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.register
 
 /**

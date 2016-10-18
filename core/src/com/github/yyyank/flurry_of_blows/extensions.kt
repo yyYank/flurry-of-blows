@@ -3,6 +3,7 @@ package com.github.yyyank.flurry_of_blows
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.github.yyyank.flurry_of_blows.domain.Position
 
 /**
  * Created by yy_yank on 2016/10/16.
