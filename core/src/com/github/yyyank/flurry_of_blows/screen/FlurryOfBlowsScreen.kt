@@ -26,8 +26,7 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
     val skin: Skin = game.config.skin
 
     init {
-        val viewport = FitViewport(game.config.gameWidth, game.config.gameHeight)
-        stage = Stage(viewport)
+        stage = Stage(game.config.viewport)
         println("${this.javaClass.name} : init")
         stage.register(Image(skin, "titleBackground"), Position(0f, 0f))
     }

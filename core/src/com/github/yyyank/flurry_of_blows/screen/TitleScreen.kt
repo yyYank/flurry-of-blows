@@ -27,8 +27,7 @@ class TitleScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAda
 
     init {
         println("${this.javaClass.name} init")
-        val viewport = FitViewport(game.config.gameWidth, game.config.gameHeight)
-        stage = Stage(viewport)
+        stage = Stage(game.config.viewport)
         stage.register(Image(skin, "titleBackground"), Position(0f, 0f))
         val button = Button(skin, "titleStart")
         stage.register(button, Position(0f, button.height),

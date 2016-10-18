@@ -19,8 +19,7 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : Scree
     val skin: Skin = game.config.skin
 
     init {
-        val viewport = FitViewport(game.config.gameWidth, game.config.gameHeight)
-        stage = Stage(viewport)
+        stage = Stage(game.config.viewport)
     }
 
 
