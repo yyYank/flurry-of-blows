@@ -11,6 +11,5 @@ data class FlurryOfBlowsGameConfig(
         val gameWidth: Float = 540f,
         val gameHeight: Float = 960f,
         val viewport: FitViewport = FitViewport(gameWidth, gameHeight),
-        val stage: Stage = Stage(viewport),
         val skin: Skin) {
 }

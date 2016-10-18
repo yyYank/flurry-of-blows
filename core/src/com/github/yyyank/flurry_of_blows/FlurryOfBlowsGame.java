@@ -18,8 +18,7 @@ public class FlurryOfBlowsGame extends Game {
         Float gameWidth = 540f;
         Float gameHeight = 960f;
         FitViewport viewport = new FitViewport(gameWidth, gameHeight);
-        Stage stage = new Stage(viewport);
-        return new FlurryOfBlowsGameConfig(gameWidth, gameHeight, viewport, stage, SkinInitializer.INSTANCE.initialize(am));
+        return new FlurryOfBlowsGameConfig(gameWidth, gameHeight, viewport, SkinInitializer.INSTANCE.initialize(am));
     }
 
 

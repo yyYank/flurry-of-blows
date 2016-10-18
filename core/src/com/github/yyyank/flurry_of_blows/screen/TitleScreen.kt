@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
+import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.register
@@ -21,11 +22,13 @@ import com.github.yyyank.flurry_of_blows.register
  */
 class TitleScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAdapter() {
 
-    val stage: Stage = game.config.stage
+    val stage: Stage
     val skin: Skin = game.config.skin
 
     init {
         println("${this.javaClass.name} init")
+        val viewport = FitViewport(game.config.gameWidth, game.config.gameHeight)
+        stage = Stage(viewport)
         stage.register(Image(skin, "titleBackground"), Position(0f, 0f))
         val button = Button(skin, "titleStart")
         stage.register(button, Position(0f, button.height),
@@ -33,7 +36,7 @@ class TitleScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAda
                     override fun clicked(event: InputEvent, x: Float, y: Float) {
                         val fadeOut = Actions.fadeOut(0.5f)
                         val toGameScreen = Actions.run(Runnable {
-                            game.screen = FlurryOfBlowsScreen()
+                            game.screen = FlurryOfBlowsScreen(game, am)
                         })
                         stage.addAction(Actions.sequence(fadeOut, toGameScreen))
                     }
@@ -66,10 +69,12 @@ class TitleScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAda
 
     override fun pause() {
         println("${this.javaClass.name} pause")
+        super.pause()
     }
 
     override fun resume() {
         println("${this.javaClass.name} resume")
+        super.resume()
     }
 
     override fun dispose() {
