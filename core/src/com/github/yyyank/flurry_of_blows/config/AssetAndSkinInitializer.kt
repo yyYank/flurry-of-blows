@@ -4,8 +4,11 @@ import com.badlogic.gdx.assets.AssetDescriptor
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.assets.loaders.BitmapFontLoader
 import com.badlogic.gdx.assets.loaders.TextureLoader
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.scenes.scene2d.ui.Button
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import java.util.concurrent.TimeUnit
 
@@ -19,11 +22,7 @@ sealed class AssetAndSkinInitializer() {
     object TitleScreenSkin  : AssetAndSkinInitializer() {
         override fun initialize(skin : Skin, am: AssetManager) {
 
-            val fontParams = BitmapFontLoader.BitmapFontParameter().let {
-                it.minFilter = Texture.TextureFilter.Linear
-                it.magFilter = Texture.TextureFilter.Linear
-                it
-            }
+
             val params = TextureLoader.TextureParameter().let {
                 it.minFilter = Texture.TextureFilter.Linear
                 it.magFilter = Texture.TextureFilter.Linear
@@ -56,6 +55,17 @@ sealed class AssetAndSkinInitializer() {
 
     object FlurryOfBlowsScreenSkin : AssetAndSkinInitializer() {
         override fun initialize(skin : Skin, am: AssetManager) {
+            val fontParams = BitmapFontLoader.BitmapFontParameter().let {
+                it.minFilter = Texture.TextureFilter.Linear
+                it.magFilter = Texture.TextureFilter.Linear
+                it
+            }
+            val fontAsset = AssetDescriptor<BitmapFont>("mplus1m.fnt", BitmapFont::class.java, fontParams)
+            am.load(fontAsset)
+            am.finishLoading()
+            skin.add("default", am.get(fontAsset), BitmapFont::class.java)
+            val font = skin.getFont("default")
+            Label.LabelStyle(font, Color.WHITE).let { skin.add("counter", it, Label.LabelStyle::class.java) }
         }
     }
 

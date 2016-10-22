@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
+import com.github.yyyank.flurry_of_blows.actor.CountDown
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.register
 
@@ -29,6 +30,13 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         stage = Stage(game.config.viewport)
         println("${this.javaClass.name} : init")
         stage.register(Image(skin, "titleBackground"), Position(0f, 0f))
+
+
+        val counter = CountDown(skin, callback = Runnable {
+        })
+        counter.setPosition(stage.width - counter.width, stage.height - counter.height)
+        stage.addActor(counter)
+        counter.start()
     }
 
     override fun render(delta: Float) {
