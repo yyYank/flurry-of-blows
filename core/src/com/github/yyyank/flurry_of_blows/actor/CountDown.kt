@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  * Created by yy_yank on 2016/10/21.
  */
-class CountDown(skin: Skin, countStart : Int = 10, val callback: Runnable?) : Label("00", skin, "counter") {
+class CountDown(skin: Skin, countStart : Int = 10, val callback: Runnable) : Label("00", skin, "counter") {
 
     val counter : AtomicInteger = AtomicInteger(countStart)
     var count : Int = countStart
