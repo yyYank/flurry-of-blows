@@ -7,7 +7,6 @@ import java.util.*
  */
 object CallbackRouter {
     private val map : LinkedHashMap<Starter, Array<out Starter>> = LinkedHashMap()
-    val emptyStarter = listOf(EmptyStarter(Runnable {}))
 
     fun defineRoot(starter : Starter, vararg starters : Starter) {
         map.put(starter, starters)

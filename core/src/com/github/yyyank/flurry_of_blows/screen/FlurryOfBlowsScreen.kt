@@ -38,8 +38,10 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         stage.register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
         stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
         stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
-        CallbackRouter.defineRoot(ready, go)
-        CallbackRouter.defineRoot(go, countDown)
+        with(CallbackRouter) {
+            defineRoot(ready, go)
+            defineRoot(go, countDown)
+        }
         CallbackRouter.start()
     }
 
