@@ -19,20 +19,17 @@ sealed class AssetAndSkinInitializer() {
 
     abstract fun initialize(skin : Skin, am: AssetManager)
 
+    val params = TextureLoader.TextureParameter().let {
+        it.minFilter = Texture.TextureFilter.Linear
+        it.magFilter = Texture.TextureFilter.Linear
+        it
+    }
+
     object TitleScreenSkin  : AssetAndSkinInitializer() {
         override fun initialize(skin : Skin, am: AssetManager) {
-
-
-            val params = TextureLoader.TextureParameter().let {
-                it.minFilter = Texture.TextureFilter.Linear
-                it.magFilter = Texture.TextureFilter.Linear
-                it
-            }
-
             val titleBackgroundAsset = textureDesc("title/background.png", params);
             val titleStartUpAsset = textureDesc("title/startup.png", params);
             val titleStartDownAsset = textureDesc("title/startdown.png", params);
-
             val assets = listOf(
                     "titleBackground" to titleBackgroundAsset,
                     "titleStartUp" to titleStartUpAsset,
@@ -66,6 +63,19 @@ sealed class AssetAndSkinInitializer() {
             skin.add("default", am.get(fontAsset), BitmapFont::class.java)
             val font = skin.getFont("default")
             Label.LabelStyle(font, Color.WHITE).let { skin.add("counter", it, Label.LabelStyle::class.java) }
+
+
+            val backgroundAsset = textureDesc("fob/background.png", params);
+            val gameReadyAsset = textureDesc("fob/ready.png", params)
+            val gameGoAsset = textureDesc("fob/go.png", params)
+            am.load(backgroundAsset)
+            am.load(gameReadyAsset)
+            am.load(gameGoAsset)
+            am.finishLoading()
+            skin.add("fobBackground", am.get(backgroundAsset), Texture::class.java)
+            skin.add("ready", am.get(gameReadyAsset), Texture::class.java)
+            skin.add("go", am.get(gameGoAsset), Texture::class.java)
+
         }
     }
 

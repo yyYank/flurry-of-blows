@@ -13,7 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
+import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.actor.CountDown
+import com.github.yyyank.flurry_of_blows.actor.Go
+import com.github.yyyank.flurry_of_blows.actor.Ready
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.register
 
@@ -28,15 +31,16 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
 
     init {
         stage = Stage(game.config.viewport)
-        println("${this.javaClass.name} : init")
-        stage.register(Image(skin, "titleBackground"), Position(0f, 0f))
-
-
-        val counter = CountDown(skin, callback = Runnable {
-        })
-        counter.setPosition(stage.width - counter.width, stage.height - counter.height)
-        stage.addActor(counter)
-        counter.start()
+        val ready = Ready(skin)
+        val go = Go(skin)
+        val countDown = CountDown(skin)
+        stage.register(Image(skin, "fobBackground"), Position(0f, 0f))
+        stage.register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
+        stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
+        stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
+        CallbackRouter.defineRoot(ready, go)
+        CallbackRouter.defineRoot(go, countDown)
+        CallbackRouter.start()
     }
 
     override fun render(delta: Float) {
