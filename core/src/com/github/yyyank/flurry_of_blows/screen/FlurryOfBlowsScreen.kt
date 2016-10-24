@@ -41,9 +41,6 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
         stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
         stage.register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
-
-
-
         with(CallbackRouter) {
             defineRoot(ready, go)
             defineRoot(go, countDown)

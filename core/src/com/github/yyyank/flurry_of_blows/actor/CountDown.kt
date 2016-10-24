@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.callback.Starter
+import com.github.yyyank.flurry_of_blows.callback.resolveCallback
+import com.github.yyyank.flurry_of_blows.callback.resolveDispatch
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
@@ -31,10 +33,6 @@ class CountDown(skin: Skin, countStart : Int = 10) : Label(countStart.toString()
         })
         val delay = Actions.delay(1f, decrement)
         val repeat = Actions.repeat(count, delay)
-        callback = Runnable {
-            CallbackRouter.next(this).forEach (Starter::start)
-        }
-        val run = callback.let { Actions.run(it) }
-        addAction(Actions.sequence(repeat, run))
+        addAction(Actions.sequence(repeat, resolveDispatch(this), resolveCallback(callback)))
     }
 }

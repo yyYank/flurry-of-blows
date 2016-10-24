@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.callback.Starter
+import com.github.yyyank.flurry_of_blows.callback.resolveCallback
+import com.github.yyyank.flurry_of_blows.callback.resolveDispatch
 import kotlin.properties.Delegates
 
 /**
@@ -38,11 +40,7 @@ class Go(val skin : Skin) : Image(skin, "go") , Starter {
         val duration = 1f
         isVisible = true
         val fadeOut = Actions.fadeOut(duration)
-        callback = Runnable {
-            CallbackRouter.next(this).forEach(Starter::start)
-        }
-        val run = callback?.let{ Actions.run(it) }
         val invisible = Actions.visible(false)
-        addAction(Actions.sequence(Actions.parallel(fadeOut, run), invisible))
+        addAction(Actions.sequence(Actions.parallel(fadeOut, resolveDispatch(this), resolveCallback(callback)), invisible))
     }
 }
