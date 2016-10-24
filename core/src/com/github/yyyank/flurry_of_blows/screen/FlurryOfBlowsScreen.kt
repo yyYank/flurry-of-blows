@@ -17,6 +17,7 @@ import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.actor.CountDown
 import com.github.yyyank.flurry_of_blows.actor.Go
 import com.github.yyyank.flurry_of_blows.actor.Ready
+import com.github.yyyank.flurry_of_blows.actor.TimeOut
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.register
 
@@ -34,13 +35,19 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         val ready = Ready(skin)
         val go = Go(skin)
         val countDown = CountDown(skin)
+        val timeout = TimeOut(skin, "timeout")
         stage.register(Image(skin, "fobBackground"), Position(0f, 0f))
         stage.register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
         stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
         stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
+        stage.register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
+
+
+
         with(CallbackRouter) {
             defineRoot(ready, go)
             defineRoot(go, countDown)
+            defineRoot(countDown, timeout)
         }
         CallbackRouter.start()
     }

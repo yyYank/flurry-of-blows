@@ -32,7 +32,7 @@ class CountDown(skin: Skin, countStart : Int = 10) : Label(countStart.toString()
         val delay = Actions.delay(1f, decrement)
         val repeat = Actions.repeat(count, delay)
         callback = Runnable {
-            CallbackRouter.next(this).forEach { Starter::start }
+            CallbackRouter.next(this).forEach (Starter::start)
         }
         val run = callback.let { Actions.run(it) }
         addAction(Actions.sequence(repeat, run))

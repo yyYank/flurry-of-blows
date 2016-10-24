@@ -68,13 +68,16 @@ sealed class AssetAndSkinInitializer() {
             val backgroundAsset = textureDesc("fob/background.png", params);
             val gameReadyAsset = textureDesc("fob/ready.png", params)
             val gameGoAsset = textureDesc("fob/go.png", params)
+            val timeoutAsset = textureDesc("fob/finished.png", params)
             am.load(backgroundAsset)
             am.load(gameReadyAsset)
             am.load(gameGoAsset)
+            am.load(timeoutAsset)
             am.finishLoading()
             skin.add("fobBackground", am.get(backgroundAsset), Texture::class.java)
             skin.add("ready", am.get(gameReadyAsset), Texture::class.java)
             skin.add("go", am.get(gameGoAsset), Texture::class.java)
+            skin.add("timeout", am.get(timeoutAsset), Texture::class.java)
 
         }
     }

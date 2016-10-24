@@ -8,8 +8,8 @@ import java.util.*
 object CallbackRouter {
     private val map : LinkedHashMap<Starter, Array<out Starter>> = LinkedHashMap()
 
-    fun defineRoot(starter : Starter, vararg starters : Starter) {
-        map.put(starter, starters)
+    fun defineRoot(trigger : Starter, vararg starters : Starter) {
+        map.put(trigger, starters)
     }
 
     fun start() {
