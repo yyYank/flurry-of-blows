@@ -68,8 +68,6 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
             defineRoot(countDown, timeout)
         }
         CallbackRouter.start()
-
-
     }
 
     override fun render(delta: Float) {
