@@ -63,6 +63,7 @@ sealed class AssetAndSkinInitializer() {
             skin.add("default", am.get(fontAsset), BitmapFont::class.java)
             val font = skin.getFont("default")
             Label.LabelStyle(font, Color.WHITE).let { skin.add("counter", it, Label.LabelStyle::class.java) }
+            Label.LabelStyle(font, Color.WHITE).let { skin.add("countup", it, Label.LabelStyle::class.java) }
 
 
             val backgroundAsset = textureDesc("fob/background.png", params);
@@ -73,6 +74,7 @@ sealed class AssetAndSkinInitializer() {
             val button2 = textureDesc("fob/fob-button2.png", params)
             val button3 = textureDesc("fob/fob-button3.png", params)
             val button4 = textureDesc("fob/fob-button4.png", params)
+            val powergauge = textureDesc("fob/powergauge.png", params)
             am.load(backgroundAsset)
             am.load(gameReadyAsset)
             am.load(gameGoAsset)
@@ -81,6 +83,7 @@ sealed class AssetAndSkinInitializer() {
             am.load(button2)
             am.load(button3)
             am.load(button4)
+            am.load(powergauge)
             am.finishLoading()
             skin.add("fobBackground", am.get(backgroundAsset), Texture::class.java)
             skin.add("ready", am.get(gameReadyAsset), Texture::class.java)
@@ -90,6 +93,7 @@ sealed class AssetAndSkinInitializer() {
             skin.add("button2", am.get(button2), Texture::class.java)
             skin.add("button3", am.get(button3), Texture::class.java)
             skin.add("button4", am.get(button4), Texture::class.java)
+            skin.add("powergauge", am.get(powergauge), Texture::class.java)
         }
     }
 

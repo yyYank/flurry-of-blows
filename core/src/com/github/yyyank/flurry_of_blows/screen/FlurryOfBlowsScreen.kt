@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -32,18 +33,22 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
     val skin: Skin = game.config.skin
 
     init {
-        stage = Stage(game.config.viewport)
+        stage = Stage(game.config.viewport, SpriteBatch())
         // http://stackoverflow.com/questions/13863138/what-is-the-simplest-way-to-make-image-touchable-in-libgdx
         Gdx.input.inputProcessor = stage
         val ready = Ready(skin)
         val go = Go(skin)
         val countDown = CountDown(skin)
         val timeout = TimeOut(skin, "timeout")
+        val powerGauge = PowerGauge(skin)
+        val countup = CountUp(skin)
         stage.register(Image(skin, "fobBackground"), Position(0f, 0f))
         stage.register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
         stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
         stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
         stage.register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
+        stage.register(powerGauge, Position(stage.width , powerGauge.height))
+        stage.register(countup, Position(stage.width - countup.width, stage.height - countup.height - countup.height))
         val button1 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button1.png")))
         val button2 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button2.png")))
         val button3 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button3.png")))
@@ -54,6 +59,7 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
             override fun clicked(event: InputEvent, x: Float, y: Float) {
                 println("click!!!!!")
                 println(animated.counter.incrementAndGet())
+                countup.counted(stage.batch as SpriteBatch)
             }
         }
         stage.register(animated, Position(animated.width / 4f, 0f), buttonClickFunction)
