@@ -1,5 +1,6 @@
 package com.github.yyyank.flurry_of_blows.actor
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
@@ -24,6 +25,7 @@ class CountDown(skin: Skin, countStart : Int = 10) : Label(countStart.toString()
 
     init {
         setText(String.format("%02d", countStart))
+        setColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a)
     }
 
 

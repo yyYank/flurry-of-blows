@@ -20,6 +20,10 @@ class CountUp(skin: Skin) : Label("000", skin, "countup") {
 
 
     val counter : AtomicInteger = AtomicInteger(0)
+
+    init {
+        setColor(Color.MAGENTA.r, Color.MAGENTA.g, Color.MAGENTA.b, Color.MAGENTA.a)
+    }
     fun counted(batch : SpriteBatch) {
         setText(String.format("%03d", counter.incrementAndGet()))
     }
