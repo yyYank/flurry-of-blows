@@ -39,13 +39,6 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         val timeout = TimeOut(skin, "timeout")
         val powerGauge = PowerGauge(skin)
         val countUp = CountUp(skin)
-        stage.register(Image(skin, "fobBackground"), Position(0f, 0f))
-        stage.register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
-        stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
-        stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
-        stage.register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
-        stage.register(powerGauge, Position(stage.width, powerGauge.height))
-        stage.register(countUp, Position(stage.width - countUp.width, stage.height - countUp.height - countUp.height))
         val animation = Animation(0.1f, frameByFrame("fob/fob-button1.png", "fob/fob-button2.png", "fob/fob-button3.png", "fob/fob-button4.png"))
         val animated = AnimatedImage(animation)
         val buttonClickFunction = object : ClickListener() {
@@ -53,18 +46,29 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
                 countUp.counted()
             }
         }
-        stage.register(animated, Position(animated.width / 4f, 0f), buttonClickFunction)
+
         countDown.callback = Runnable {
             animated.removeListener(buttonClickFunction)
             moveTo(ProcessingFobScreen(game, am, FlurryOfBlowsScoreIntent(countUp.counter.toInt())), game, stage)
         }
-        with(CallbackRouter) {
+
+        stage.run{
+            register(Image(skin, "fobBackground"), Position(0f, 0f))
+            register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
+            register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
+            register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
+            register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
+            register(powerGauge, Position(stage.width, powerGauge.height))
+            register(countUp, Position(stage.width - countUp.width, stage.height - countUp.height - countUp.height))
+            register(animated, Position(animated.width / 4f, 0f), buttonClickFunction)
+        }
+
+        CallbackRouter.apply {
             initialize()
             defineRoot(ready, go)
             defineRoot(go, countDown)
             defineRoot(countDown, timeout)
-        }
-        CallbackRouter.start()
+        }.start()
     }
 
     override fun render(delta: Float) {
