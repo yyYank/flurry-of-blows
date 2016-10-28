@@ -2,11 +2,10 @@ package com.github.yyyank.flurry_of_blows;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.github.yyyank.flurry_of_blows.config.FlurryOfBlowsGameConfig;
 import com.github.yyyank.flurry_of_blows.config.AssetAndSkinInitializer;
+import com.github.yyyank.flurry_of_blows.config.FlurryOfBlowsGameConfig;
 import com.github.yyyank.flurry_of_blows.screen.TitleScreen;
 
 public class FlurryOfBlowsGame extends Game {

@@ -7,10 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
  * Created by yy_yank on 2016/10/24.
  */
 
-fun resolveCallback(callback : Runnable?) : Action = callback?.let{ Actions.run(it) } ?: Actions.run(Runnable{})
+fun resolveCallback(callback: Runnable?): Action = callback?.let { Actions.run(it) } ?: Actions.run(Runnable {})
 
-fun resolveDispatch(starter : Starter) : Action = Runnable {
+fun resolveDispatch(starter: Starter): Action = Runnable {
     CallbackRouter.next(starter).forEach(Starter::start)
-}.let{
+}.let {
     Actions.run(it)
 }

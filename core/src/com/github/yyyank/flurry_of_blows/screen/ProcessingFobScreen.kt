@@ -6,15 +6,15 @@ import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
+import com.github.yyyank.flurry_of_blows.domain.PreviousScreenIntent
 import com.github.yyyank.flurry_of_blows.moveTo
 
 /**
  * 連打後のプロセス画面
  * Created by yy_yank on 2016/10/16.
  */
-class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAdapter() {
+class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score: PreviousScreenIntent<Int>) : ScreenAdapter() {
 
     val stage: Stage
     val skin: Skin = game.config.skin

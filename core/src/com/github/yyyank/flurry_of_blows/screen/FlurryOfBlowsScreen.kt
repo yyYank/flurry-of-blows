@@ -4,25 +4,21 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.ScreenAdapter
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
-import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.actor.*
 import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
+import com.github.yyyank.flurry_of_blows.domain.FlurryOfBlowsScoreIntent
 import com.github.yyyank.flurry_of_blows.domain.Position
+import com.github.yyyank.flurry_of_blows.frameByFrame
 import com.github.yyyank.flurry_of_blows.moveTo
 import com.github.yyyank.flurry_of_blows.register
-import com.sun.glass.ui.TouchInputSupport
 
 /**
  * 連打画面
@@ -42,32 +38,25 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         val countDown = CountDown(skin)
         val timeout = TimeOut(skin, "timeout")
         val powerGauge = PowerGauge(skin)
-        val countup = CountUp(skin)
+        val countUp = CountUp(skin)
         stage.register(Image(skin, "fobBackground"), Position(0f, 0f))
         stage.register(countDown, Position(stage.width - countDown.width, stage.height - countDown.height))
         stage.register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
         stage.register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
         stage.register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
-        stage.register(powerGauge, Position(stage.width , powerGauge.height))
-        stage.register(countup, Position(stage.width - countup.width, stage.height - countup.height - countup.height))
-        val button1 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button1.png")))
-        val button2 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button2.png")))
-        val button3 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button3.png")))
-        val button4 = TextureRegion(Texture(Gdx.files.internal("fob/fob-button4.png")))
-        val animation = Animation(0.1f, button1, button2, button3, button4)
+        stage.register(powerGauge, Position(stage.width, powerGauge.height))
+        stage.register(countUp, Position(stage.width - countUp.width, stage.height - countUp.height - countUp.height))
+        val animation = Animation(0.1f, frameByFrame("fob/fob-button1.png", "fob/fob-button2.png", "fob/fob-button3.png", "fob/fob-button4.png"))
         val animated = AnimatedImage(animation)
         val buttonClickFunction = object : ClickListener() {
             override fun clicked(event: InputEvent, x: Float, y: Float) {
-                println("click!!!!!")
-                println(animated.counter.incrementAndGet())
-                countup.counted(stage.batch as SpriteBatch)
+                countUp.counted()
             }
         }
         stage.register(animated, Position(animated.width / 4f, 0f), buttonClickFunction)
         countDown.callback = Runnable {
             animated.removeListener(buttonClickFunction)
-            println("${animated.counter.toString()} 点でした！！！")
-            moveTo(ProcessingFobScreen(game, am), game, stage)
+            moveTo(ProcessingFobScreen(game, am, FlurryOfBlowsScoreIntent(countUp.counter.toInt())), game, stage)
         }
         with(CallbackRouter) {
             initialize()

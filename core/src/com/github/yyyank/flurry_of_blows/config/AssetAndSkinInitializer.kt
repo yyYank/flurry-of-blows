@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
  */
 sealed class AssetAndSkinInitializer() {
 
-    abstract fun initialize(skin : Skin, am: AssetManager)
+    abstract fun initialize(skin: Skin, am: AssetManager)
 
     val params = TextureLoader.TextureParameter().let {
         it.minFilter = Texture.TextureFilter.Linear
@@ -25,8 +25,8 @@ sealed class AssetAndSkinInitializer() {
         it
     }
 
-    object TitleScreenSkin  : AssetAndSkinInitializer() {
-        override fun initialize(skin : Skin, am: AssetManager) {
+    object TitleScreenSkin : AssetAndSkinInitializer() {
+        override fun initialize(skin: Skin, am: AssetManager) {
             val titleBackgroundAsset = textureDesc("title/background.png", params);
             val titleStartUpAsset = textureDesc("title/startup.png", params);
             val titleStartDownAsset = textureDesc("title/startdown.png", params);
@@ -51,7 +51,7 @@ sealed class AssetAndSkinInitializer() {
     }
 
     object FlurryOfBlowsScreenSkin : AssetAndSkinInitializer() {
-        override fun initialize(skin : Skin, am: AssetManager) {
+        override fun initialize(skin: Skin, am: AssetManager) {
             val fontParams = BitmapFontLoader.BitmapFontParameter().let {
                 it.minFilter = Texture.TextureFilter.Linear
                 it.magFilter = Texture.TextureFilter.Linear

@@ -1,8 +1,12 @@
 package com.github.yyyank.flurry_of_blows
 
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.ScreenAdapter
+import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import com.badlogic.gdx.utils.Array
 
 /**
  * Created by yy_yank on 2016/10/16.
@@ -15,5 +19,8 @@ fun moveTo(screen: ScreenAdapter, game: FlurryOfBlowsGame, stage: Stage) {
     stage.addAction(Actions.sequence(fadeOut, toGameScreen))
 }
 
+fun frameByFrame(vararg fileNames: String): Array<TextureRegion> = Array<TextureRegion>().apply {
+    fileNames.map { TextureRegion(Texture(Gdx.files.internal(it))) }.forEach { add(it) }
+}
 
 

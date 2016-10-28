@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  * Created by yy_yank on 2016/10/21.
  */
-class PowerGauge (val skin : Skin) : Image(skin, "powergauge"), Starter {
+class PowerGauge(val skin: Skin) : Image(skin, "powergauge"), Starter {
 
     override var callback: Runnable? = null
 

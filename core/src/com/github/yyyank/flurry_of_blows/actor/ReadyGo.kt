@@ -2,18 +2,16 @@ package com.github.yyyank.flurry_of_blows.actor
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.callback.Starter
 import com.github.yyyank.flurry_of_blows.callback.resolveCallback
 import com.github.yyyank.flurry_of_blows.callback.resolveDispatch
-import kotlin.properties.Delegates
 
 /**
  * Created by yy_yank on 2016/10/21.
  */
-class Ready(val skin : Skin) : Image(skin, "ready") , Starter {
+class Ready(val skin: Skin) : Image(skin, "ready"), Starter {
 
 
     override var callback: Runnable? = null
@@ -30,12 +28,15 @@ class Ready(val skin : Skin) : Image(skin, "ready") , Starter {
         addAction(Actions.sequence(Actions.parallel(scaleTo, moveBy), invisible, run))
     }
 }
-class Go(val skin : Skin) : Image(skin, "go") , Starter {
+
+class Go(val skin: Skin) : Image(skin, "go"), Starter {
 
     override var callback: Runnable? = null
+
     init {
         isVisible = false
     }
+
     override fun start() {
         val duration = 1f
         isVisible = true

@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.callback.Starter
 import com.github.yyyank.flurry_of_blows.callback.resolveCallback
 import com.github.yyyank.flurry_of_blows.callback.resolveDispatch
@@ -13,15 +12,15 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  * Created by yy_yank on 2016/10/21.
  */
-class CountDown(skin: Skin, countStart : Int = 10) : Label(countStart.toString(), skin, "counter"), Starter {
+class CountDown(skin: Skin, countStart: Int = 10) : Label(countStart.toString(), skin, "counter"), Starter {
 
     override var callback: Runnable? = null
-    val counter : AtomicInteger = AtomicInteger(countStart)
-    var count : Int = countStart
-    set(value) {
-        field = value
-        setText(String.format("%02d", value))
-    }
+    val counter: AtomicInteger = AtomicInteger(countStart)
+    var count: Int = countStart
+        set(value) {
+            field = value
+            setText(String.format("%02d", value))
+        }
 
     init {
         setText(String.format("%02d", countStart))
