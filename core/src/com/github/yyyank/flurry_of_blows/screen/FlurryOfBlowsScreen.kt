@@ -20,6 +20,7 @@ import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.actor.*
 import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.domain.Position
+import com.github.yyyank.flurry_of_blows.moveTo
 import com.github.yyyank.flurry_of_blows.register
 import com.sun.glass.ui.TouchInputSupport
 
@@ -66,9 +67,10 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         countDown.callback = Runnable {
             animated.removeListener(buttonClickFunction)
             println("${animated.counter.toString()} 点でした！！！")
-
+            moveTo(ProcessingFobScreen(game, am), game, stage)
         }
         with(CallbackRouter) {
+            initialize()
             defineRoot(ready, go)
             defineRoot(go, countDown)
             defineRoot(countDown, timeout)

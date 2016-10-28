@@ -12,6 +12,10 @@ object CallbackRouter {
         map.put(trigger, starters)
     }
 
+    fun initialize(){
+        map.clear()
+    }
+
     fun start() {
         map.entries.firstOrNull()?.key?.start()
     }

@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.domain.Position
+import com.github.yyyank.flurry_of_blows.moveTo
 import com.github.yyyank.flurry_of_blows.register
 
 /**
@@ -33,11 +34,7 @@ class TitleScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : ScreenAda
         stage.register(button, Position(0f, button.height),
                 object : ClickListener() {
                     override fun clicked(event: InputEvent, x: Float, y: Float) {
-                        val fadeOut = Actions.fadeOut(0.5f)
-                        val toGameScreen = Actions.run(Runnable {
-                            game.screen = FlurryOfBlowsScreen(game, am)
-                        })
-                        stage.addAction(Actions.sequence(fadeOut, toGameScreen))
+                        moveTo(FlurryOfBlowsScreen(game, am), game, stage)
                     }
                 }
         )

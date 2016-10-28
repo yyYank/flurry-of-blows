@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
+import com.github.yyyank.flurry_of_blows.moveTo
 
 /**
  * 連打後のプロセス画面
@@ -39,6 +40,7 @@ class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
     override fun show() {
         println("${this.javaClass.name} show")
         Gdx.input.inputProcessor = stage
+        moveTo(FobResultScreen(game, am), game, stage)
     }
 
     override fun hide() {

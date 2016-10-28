@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions
 /**
  * Created by yy_yank on 2016/10/16.
  */
-fun move(game: FlurryOfBlowsGame, stage: Stage, screen: ScreenAdapter) {
+fun moveTo(screen: ScreenAdapter, game: FlurryOfBlowsGame, stage: Stage) {
     val fadeOut = Actions.fadeOut(0.5f)
     val toGameScreen = Actions.run(Runnable {
         game.screen = screen
