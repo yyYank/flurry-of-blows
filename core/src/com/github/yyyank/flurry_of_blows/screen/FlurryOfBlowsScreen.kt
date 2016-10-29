@@ -11,14 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
-import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
+import com.github.yyyank.flurry_of_blows.*
 import com.github.yyyank.flurry_of_blows.actor.*
 import com.github.yyyank.flurry_of_blows.callback.CallbackRouter
 import com.github.yyyank.flurry_of_blows.domain.FlurryOfBlowsScoreIntent
 import com.github.yyyank.flurry_of_blows.domain.Position
-import com.github.yyyank.flurry_of_blows.frameByFrame
-import com.github.yyyank.flurry_of_blows.moveTo
-import com.github.yyyank.flurry_of_blows.register
 
 /**
  * 連打画面
@@ -47,10 +44,11 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
             }
         }
 
-        countDown.callback = Runnable {
+        countDown.callback =  Runnable {
             animated.removeListener(buttonClickFunction)
             moveTo(ProcessingFobScreen(game, am, FlurryOfBlowsScoreIntent(countUp.counter.toInt())), game, stage)
         }
+
 
         stage.run{
             register(Image(skin, "fobBackground"), Position(0f, 0f))
@@ -80,32 +78,32 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
     }
 
     override fun resize(width: Int, height: Int) {
-        println("${this.javaClass.name} resize")
+        Logger.debug("${this.javaClass.name} resize")
         stage.viewport.update(width, height)
     }
 
     override fun show() {
-        println("${this.javaClass.name} show")
+        Logger.debug("${this.javaClass.name} show")
         super.show()
     }
 
     override fun hide() {
-        println("${this.javaClass.name} hide")
+        Logger.debug("${this.javaClass.name} hide")
         dispose()
     }
 
     override fun pause() {
-        println("${this.javaClass.name} pause")
+        Logger.debug("${this.javaClass.name} pause")
         super.pause()
     }
 
     override fun resume() {
-        println("${this.javaClass.name} resume")
+        Logger.debug("${this.javaClass.name} resume")
         super.resume()
     }
 
     override fun dispose() {
-        println("${this.javaClass.name} dispose")
+        Logger.debug("${this.javaClass.name} dispose")
         stage.dispose()
     }
 }

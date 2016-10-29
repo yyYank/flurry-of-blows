@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
+import com.github.yyyank.flurry_of_blows.Logger
 import com.github.yyyank.flurry_of_blows.moveTo
 
 /**
@@ -32,31 +33,31 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : Scree
     }
 
     override fun resize(width: Int, height: Int) {
-        println("${this.javaClass.name} resize")
+        Logger.debug("${this.javaClass.name} resize")
         stage.viewport.update(width, height)
     }
 
     override fun show() {
-        println("${this.javaClass.name} show")
+        Logger.debug("${this.javaClass.name} show")
         Gdx.input.inputProcessor = stage
         moveTo(TitleScreen(game, am), game, stage)
     }
 
     override fun hide() {
-        println("${this.javaClass.name} hide")
+        Logger.debug("${this.javaClass.name} hide")
         dispose()
     }
 
     override fun pause() {
-        println("${this.javaClass.name} pause")
+        Logger.debug("${this.javaClass.name} pause")
     }
 
     override fun resume() {
-        println("${this.javaClass.name} resume")
+        Logger.debug("${this.javaClass.name} resume")
     }
 
     override fun dispose() {
-        println("${this.javaClass.name} dispose")
+        Logger.debug("${this.javaClass.name} dispose")
         stage.dispose()
     }
 }
