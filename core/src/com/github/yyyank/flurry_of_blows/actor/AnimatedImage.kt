@@ -14,7 +14,7 @@ class AnimatedImage(val animation: Animation) : Image(animation.getKeyFrame(0f))
     override fun act(delta: Float) {
         val d = drawable as TextureRegionDrawable
         stateTime += delta
-        d.region = animation?.getKeyFrame(stateTime, true)
+        d.region = animation.getKeyFrame(stateTime, true)
         super.act(delta);
     }
 }
