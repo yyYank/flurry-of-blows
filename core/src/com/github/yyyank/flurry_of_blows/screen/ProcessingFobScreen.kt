@@ -3,14 +3,19 @@ package com.github.yyyank.flurry_of_blows.screen
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.ScreenAdapter
 import com.badlogic.gdx.assets.AssetManager
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.Logger
+import com.github.yyyank.flurry_of_blows.actor.Text
+import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.domain.PreviousScreenIntent
 import com.github.yyyank.flurry_of_blows.domain.ProcessingFobScreenIntent
+import com.github.yyyank.flurry_of_blows.domain.RGBA
 import com.github.yyyank.flurry_of_blows.moveTo
+import com.github.yyyank.flurry_of_blows.register
 
 /**
  * 連打後のプロセス画面
@@ -23,6 +28,15 @@ class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager, val
 
     init {
         stage = Stage(game.config.viewport)
+        val textActor = Text(
+                "審議中・・・・・・",40
+                , Position(100f, 800f)
+                , RGBA(
+                Color.WHITE.r,
+                Color.WHITE.g,
+                Color.WHITE.b,
+                Color.WHITE.a))
+        stage.register(textActor)
     }
 
 

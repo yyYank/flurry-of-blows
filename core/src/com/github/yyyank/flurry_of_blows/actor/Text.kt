@@ -18,7 +18,7 @@ import com.github.yyyank.flurry_of_blows.domain.RGBA
      val font : BitmapFont
      val upperAlphabet : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
      val lowerAlphabet : String = "abcdefghijklmnopqrstuvwxyz"
-     val kanji : String = "得点"
+     val kanji : String = "得点審議中"
      val hiragana : String = "あいうえお" + "かきくけこ" + "さしすせそ" + "たちつてと" +
              "なにぬねの" + "はひふへほ" + "まみむめも" + "やゆよ"+ "らりるれろ" + "わをん" +
              "がぎぐげご" + "ざじずぜぞ" + "だぢづでど" + "ばびぶべぼ" +
@@ -29,7 +29,7 @@ import com.github.yyyank.flurry_of_blows.domain.RGBA
              "ガギグゲゴ" + "ザジズゼゾ" + "ダヂヅデド" + "バビブベボ" +
              "パピプペポ" + "ァィゥェォャュョ"
      val numeric : String = "1234567890"
-     val symbol = "!?！？"
+     val symbol = "!?！？・"
      val characters = "$upperAlphabet$lowerAlphabet$hiragana$katakana$kanji$numeric$symbol"
 
 
