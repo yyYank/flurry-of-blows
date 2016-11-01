@@ -9,13 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.Logger
 import com.github.yyyank.flurry_of_blows.domain.PreviousScreenIntent
+import com.github.yyyank.flurry_of_blows.domain.ProcessingFobScreenIntent
 import com.github.yyyank.flurry_of_blows.moveTo
 
 /**
  * 連打後のプロセス画面
  * Created by yy_yank on 2016/10/16.
  */
-class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score: PreviousScreenIntent<Int>) : ScreenAdapter() {
+class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager, val score: PreviousScreenIntent<Int>) : ScreenAdapter() {
 
     val stage: Stage
     val skin: Skin = game.config.skin
@@ -41,7 +42,7 @@ class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager, sco
     override fun show() {
         Logger.debug("${this.javaClass.name} show")
         Gdx.input.inputProcessor = stage
-        moveTo(FobResultScreen(game, am), game, stage)
+        moveTo(FobResultScreen(game, am, ProcessingFobScreenIntent(score.receive())), game, stage)
     }
 
     override fun hide() {

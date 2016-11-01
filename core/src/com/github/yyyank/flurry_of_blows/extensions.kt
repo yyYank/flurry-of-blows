@@ -15,7 +15,7 @@ fun Stage.register(actor: Actor, pos: Position) {
     }
 }
 
-fun Stage.register(actor: Actor, pos: Position, vararg listeners: EventListener) {
+fun Stage.register(actor: Actor, pos: Position = Position.NONE, vararg listeners: EventListener) {
     actor.let {
         val self = it
         self.setPosition(pos.x, pos.y)

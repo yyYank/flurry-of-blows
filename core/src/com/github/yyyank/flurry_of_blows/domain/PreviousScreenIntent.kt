@@ -11,3 +11,6 @@ class FlurryOfBlowsScoreIntent(private val score: Int) : PreviousScreenIntent<In
     override fun receive(): Int = score
 }
 
+class ProcessingFobScreenIntent(private val score: Int) : PreviousScreenIntent<Int> {
+    override fun receive(): Int = score
+}
