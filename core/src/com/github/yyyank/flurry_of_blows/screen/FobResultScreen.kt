@@ -28,16 +28,24 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score :
 
     init {
         stage = Stage(game.config.viewport)
-
         val textActor = Text(
                 "スコアは${score.receive()}点でした！！！！",40
-                , Position(100f, 800f)
+                , Position(102f, 802f)
                 , RGBA(
                 Color.WHITE.r,
                 Color.WHITE.g,
                 Color.WHITE.b,
                 Color.WHITE.a))
+        val textActor2 = Text(
+                "スコアは${score.receive()}点でした！！！！",40
+                , Position(100f, 800f)
+                , RGBA(
+                Color.RED.r,
+                Color.RED.g,
+                Color.RED.b,
+                Color.RED.a))
         stage.register(textActor)
+        stage.register(textActor2)
     }
 
 
@@ -47,7 +55,6 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score :
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
         stage.act()
         stage.draw()
-        TimeUnit.SECONDS.sleep(2)
     }
 
     override fun resize(width: Int, height: Int) {
