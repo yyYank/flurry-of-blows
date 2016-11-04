@@ -104,6 +104,24 @@ sealed class AssetAndSkinInitializer() {
 
     object FobResultScreenSkin : AssetAndSkinInitializer() {
         override fun initialize(skin: Skin, am: AssetManager) {
+
+            val resultRestartUpAsset = textureDesc("result/restartUp.png", params)
+            val resultRestartDownAsset = textureDesc("result/restartDown.png", params)
+            val resultExitUpAsset = textureDesc("result/exitUp.png", params)
+            val resultExitDownAsset = textureDesc("result/exitDown.png", params)
+            am.load(resultRestartUpAsset)
+            am.load(resultRestartDownAsset)
+            am.load(resultExitUpAsset)
+            am.load(resultExitDownAsset)
+            am.finishLoading()
+
+            skin.add("resultRestartUp", am.get(resultRestartUpAsset), Texture::class.java)
+            skin.add("resultRestartDown", am.get(resultRestartDownAsset), Texture::class.java)
+            skin.add("resultExitUp", am.get(resultExitUpAsset), Texture::class.java)
+            skin.add("resultExitDown", am.get(resultExitDownAsset), Texture::class.java)
+
+            Button.ButtonStyle(skin.getDrawable("resultRestartUp"), skin.getDrawable("resultRestartDown"), null).let { skin.add("resultRestart", it, Button.ButtonStyle::class.java) }
+            Button.ButtonStyle(skin.getDrawable("resultExitUp"), skin.getDrawable("resultExitDown"), null).let { skin.add("resultExit", it, Button.ButtonStyle::class.java) }
         }
     }
 }

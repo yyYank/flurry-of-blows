@@ -5,17 +5,21 @@ import com.badlogic.gdx.ScreenAdapter
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.Logger
 import com.github.yyyank.flurry_of_blows.actor.Text
+import com.github.yyyank.flurry_of_blows.actor.forResult
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.domain.ProcessingFobScreenIntent
 import com.github.yyyank.flurry_of_blows.domain.RGBA
 import com.github.yyyank.flurry_of_blows.moveTo
 import com.github.yyyank.flurry_of_blows.register
-import java.util.concurrent.TimeUnit
 
 /**
  * ゲームの結果画面
@@ -46,6 +50,32 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score :
                 Color.RED.a))
         stage.register(textActor)
         stage.register(textActor2)
+
+
+
+        val restart = Button(skin, "resultRestart")
+        restart.setPosition((stage.width - (restart.width * 2f)) / 3f, restart.height / 2f)
+        stage.addActor(restart)
+
+        val exit = Button(skin, "resultExit")
+        exit.setPosition(exit.width + ((stage.width - (exit.width * 2f)) * 2f / 3f), exit.height / 2f)
+        stage.addActor(exit)
+        exit.addListener(object : ClickListener() {
+            override fun clicked(event: InputEvent, x: Float, y: Float) {
+                // ばいびー
+                Gdx.app.exit()
+            }
+        })
+
+        restart.addListener(object : ClickListener() {
+            override fun clicked(event: InputEvent, x: Float, y: Float) {
+                val fadeOut = Actions.fadeOut(0.5f)
+                val toGameScreen = Actions.run(Runnable {
+                    game.screen = FlurryOfBlowsScreen(game, am)
+                })
+                stage.addAction(Actions.sequence(fadeOut, toGameScreen))
+            }
+        })
     }
 
 
@@ -65,7 +95,7 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score :
     override fun show() {
         Logger.debug("${this.javaClass.name} show")
         Gdx.input.inputProcessor = stage
-        moveTo(TitleScreen(game, am), game, stage)
+//        moveTo(TitleScreen(game, am), game, stage)
     }
 
     override fun hide() {
