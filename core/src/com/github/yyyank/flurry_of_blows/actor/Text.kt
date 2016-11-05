@@ -10,9 +10,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.github.yyyank.flurry_of_blows.domain.Position
-import com.github.yyyank.flurry_of_blows.domain.RGBA
 
- class Text (val value : String, val fontSize : Int, val pos : Position, val rgba: RGBA = RGBA(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a)) : Actor() {
+class Text (val value : String, val fontSize : Int, val pos : Position, val rgba: Color = Color.BLACK) : Actor() {
 
 
      val font : BitmapFont

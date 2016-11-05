@@ -14,11 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.github.yyyank.flurry_of_blows.FlurryOfBlowsGame
 import com.github.yyyank.flurry_of_blows.Logger
 import com.github.yyyank.flurry_of_blows.actor.Text
-import com.github.yyyank.flurry_of_blows.actor.forResult
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.domain.ProcessingFobScreenIntent
-import com.github.yyyank.flurry_of_blows.domain.RGBA
-import com.github.yyyank.flurry_of_blows.moveTo
 import com.github.yyyank.flurry_of_blows.register
 
 /**
@@ -33,49 +30,36 @@ class FobResultScreen(val game: FlurryOfBlowsGame, val am: AssetManager, score :
     init {
         stage = Stage(game.config.viewport)
         val textActor = Text(
-                "スコアは${score.receive()}点でした！！！！",40
+                "スコアは${score.receive()}点でした！！！！", 40
                 , Position(102f, 802f)
-                , RGBA(
-                Color.WHITE.r,
-                Color.WHITE.g,
-                Color.WHITE.b,
-                Color.WHITE.a))
+                ,Color.WHITE)
         val textActor2 = Text(
-                "スコアは${score.receive()}点でした！！！！",40
+                "スコアは${score.receive()}点でした！！！！", 40
                 , Position(100f, 800f)
-                , RGBA(
-                Color.RED.r,
-                Color.RED.g,
-                Color.RED.b,
-                Color.RED.a))
-        stage.register(textActor)
-        stage.register(textActor2)
-
-
-
+                , Color.RED)
         val restart = Button(skin, "resultRestart")
-        restart.setPosition((stage.width - (restart.width * 2f)) / 3f, restart.height / 2f)
-        stage.addActor(restart)
-
         val exit = Button(skin, "resultExit")
-        exit.setPosition(exit.width + ((stage.width - (exit.width * 2f)) * 2f / 3f), exit.height / 2f)
-        stage.addActor(exit)
-        exit.addListener(object : ClickListener() {
-            override fun clicked(event: InputEvent, x: Float, y: Float) {
-                // ばいびー
-                Gdx.app.exit()
-            }
-        })
-
-        restart.addListener(object : ClickListener() {
-            override fun clicked(event: InputEvent, x: Float, y: Float) {
-                val fadeOut = Actions.fadeOut(0.5f)
-                val toGameScreen = Actions.run(Runnable {
-                    game.screen = FlurryOfBlowsScreen(game, am)
-                })
-                stage.addAction(Actions.sequence(fadeOut, toGameScreen))
-            }
-        })
+        stage.run {
+            register(textActor)
+            register(textActor2)
+            register(restart, Position((stage.width - (restart.width * 2f)) / 3f, restart.height / 2f),
+                    object : ClickListener() {
+                        override fun clicked(event: InputEvent, x: Float, y: Float) {
+                            val fadeOut = Actions.fadeOut(0.5f)
+                            val toGameScreen = Actions.run(Runnable {
+                                game.screen = FlurryOfBlowsScreen(game, am)
+                            })
+                            stage.addAction(Actions.sequence(fadeOut, toGameScreen))
+                        }
+                    })
+            register(exit, Position(exit.width + ((stage.width - (exit.width * 2f)) * 2f / 3f), exit.height / 2f),
+                    object : ClickListener() {
+                        override fun clicked(event: InputEvent, x: Float, y: Float) {
+                            // ばいびー
+                            Gdx.app.exit()
+                        }
+                    })
+        }
     }
 
 

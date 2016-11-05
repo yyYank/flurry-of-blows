@@ -13,7 +13,6 @@ import com.github.yyyank.flurry_of_blows.actor.Text
 import com.github.yyyank.flurry_of_blows.domain.Position
 import com.github.yyyank.flurry_of_blows.domain.PreviousScreenIntent
 import com.github.yyyank.flurry_of_blows.domain.ProcessingFobScreenIntent
-import com.github.yyyank.flurry_of_blows.domain.RGBA
 import com.github.yyyank.flurry_of_blows.moveTo
 import com.github.yyyank.flurry_of_blows.register
 
@@ -31,11 +30,7 @@ class ProcessingFobScreen(val game: FlurryOfBlowsGame, val am: AssetManager, val
         val textActor = Text(
                 "審議中・・・・・・",40
                 , Position(100f, 800f)
-                , RGBA(
-                Color.WHITE.r,
-                Color.WHITE.g,
-                Color.WHITE.b,
-                Color.WHITE.a))
+                ,Color.WHITE)
         stage.register(textActor)
     }
 
