@@ -40,7 +40,7 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         val animated = AnimatedImage(animation)
         val buttonClickFunction = object : ClickListener() {
             override fun clicked(event: InputEvent, x: Float, y: Float) {
-                powerGauge.texture.increment(stage)
+                powerGauge.increment(stage)
                 countUp.counted()
             }
         }
@@ -58,7 +58,7 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
             register(ready, Position((stage.width - ready.width) / 2f, (stage.height - ready.height) / 2f))
             register(go, Position((stage.width - go.width) / 2f, (stage.height - go.height) / 2f))
             register(timeout, Position((stage.width - timeout.width) / 2f, (stage.height - timeout.height) / 2f))
-            register(powerGauge, Position(stage.width, powerGauge.height))
+            register(powerGauge, Position(stage.width, 200f))
             register(countUp, Position(stage.width - countUp.width, stage.height - countUp.height - countUp.height))
             register(animated, Position(animated.width / 4f, 0f), buttonClickFunction)
         }

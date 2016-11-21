@@ -9,12 +9,9 @@ class Position(val x: Float, val y: Float) {
     }
 }
 
-class MovablePosition(var x: Float, var y: Float) {
-    companion object  {
-        val NONE = Position(0f, 0f)
-    }
+class MovablePosition(var x: Int, var y: Int) {
 
-    fun move(addX: Float, addY: Float) {
+    fun move(addX: Int, addY: Int) {
         this.x = x + addX
         this.y = y + addY
     }
