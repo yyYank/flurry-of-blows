@@ -34,12 +34,13 @@ class FlurryOfBlowsScreen(val game: FlurryOfBlowsGame, val am: AssetManager) : S
         val go = Go(skin)
         val countDown = CountDown(skin)
         val timeout = TimeOut(skin, "timeout")
-        val powerGauge = PowerGauge(skin)
+        val powerGauge = PowerGauge(skin, stage)
         val countUp = CountUp(skin)
         val animation = Animation(0.1f, frameByFrame("fob/fob-button1.png", "fob/fob-button2.png", "fob/fob-button3.png", "fob/fob-button4.png"))
         val animated = AnimatedImage(animation)
         val buttonClickFunction = object : ClickListener() {
             override fun clicked(event: InputEvent, x: Float, y: Float) {
+                powerGauge.texture.increment(stage)
                 countUp.counted()
             }
         }
